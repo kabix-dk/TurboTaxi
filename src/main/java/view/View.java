@@ -5,7 +5,9 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import view.windows.GameWindow;
 import view.windows.MainMenuWindow;
+import view.windows.NewGameWindow;
 import view.windows.OptionsWindow;
 
 import java.io.IOException;
@@ -17,6 +19,8 @@ public class View extends BasicWindow {
     private WindowBasedTextGUI textGUI;
     private MainMenuWindow mainMenuWindow;
     private OptionsWindow optionsWindow;
+    private NewGameWindow newGameWindow;
+    private GameWindow gameWindow;
 
     public View() {
         try {
@@ -25,6 +29,9 @@ public class View extends BasicWindow {
             this.textGUI = new MultiWindowTextGUI(screen);
             this.mainMenuWindow = new MainMenuWindow();
             this.optionsWindow = new OptionsWindow();
+            this.newGameWindow = new NewGameWindow();
+            this.gameWindow = new GameWindow();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,5 +53,13 @@ public class View extends BasicWindow {
 
     public OptionsWindow getOptionsWindow() {
         return optionsWindow;
+    }
+
+    public NewGameWindow getNewGameWindow() {
+        return newGameWindow;
+    }
+
+    public GameWindow getGameWindow() {
+        return gameWindow;
     }
 }
