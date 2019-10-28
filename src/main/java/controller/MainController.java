@@ -46,7 +46,7 @@ public class MainController {
                 view.getNewGameWindow().close();
                 view.showWindow(view.getMainMenuWindow());
             } else if (button == view.getNewGameWindow().getNewGameButton()) {
-                prepareNewGame(20);
+                prepareNewGame(30, 25);
                 view.getNewGameWindow().close();
                 view.showWindow(view.getGameWindow());
             }
@@ -86,6 +86,7 @@ public class MainController {
 
             if(updateFields) {
                 view.getGameWindow().updateFields(oldPosition, game.getPlayer().getPosition());
+                view.getGameWindow().updateStats();
             }
         }
     }
@@ -105,8 +106,8 @@ public class MainController {
         view.getNewGameWindow().getNewGameButton().addListener(buttonListener);
     }
 
-    private void prepareNewGame(int petrol) {
-        game.setPlayer(new Player(petrol));
+    private void prepareNewGame(int petrol, int cash) {
+        game.setPlayer(new Player(petrol, cash));
         view.createGameWindow(game);
         view.getGameWindow().addWindowListener(gameWindowListener);
     }

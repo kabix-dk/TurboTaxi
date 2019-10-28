@@ -18,6 +18,42 @@ public class ViewComponents {
             case Field.BUILDING:
                 label = new Label("██");
                 return label;
+            case Field.HOUSE_AGRESOR:
+                label = new Label("  ");
+                label.setBackgroundColor(TextColor.ANSI.RED);
+                return label;
+            case Field.HOUSE_ANONYMOUS:
+                label = new Label("  ");
+                label.setBackgroundColor(TextColor.ANSI.CYAN);
+                return label;
+            case Field.HOUSE_CASUAL:
+                label = new Label("  ");
+                label.setBackgroundColor(TextColor.ANSI.BLUE);
+                return label;
+            case Field.HOUSE_REACH:
+                label = new Label("  ");
+                label.setBackgroundColor(TextColor.ANSI.GREEN);
+                return label;
+            case Field.CLIENT_AGRESOR:
+                label = new Label("!");
+                label.setForegroundColor(TextColor.ANSI.RED);
+                return label;
+            case Field.CLIENT_ANONYMOUS:
+                label = new Label("#");
+                label.setForegroundColor(TextColor.ANSI.CYAN);
+                return label;
+            case Field.CLIENT_CASUAL:
+                label = new Label("@");
+                label.setForegroundColor(TextColor.ANSI.BLUE);
+                return label;
+            case Field.CLIENT_REACH:
+                label = new Label("$");
+                label.setForegroundColor(TextColor.ANSI.GREEN);
+                return label;
+            case Field.PETROL_STATION:
+                label = new Label("  ");
+                label.setBackgroundColor(TextColor.ANSI.YELLOW);
+                return label;
             default:
                 break;
         }
@@ -26,7 +62,9 @@ public class ViewComponents {
     }
 
     public static Component createPlayer() {
-        return new Label("▀");
+        Label label = new Label("▀");
+        label.setForegroundColor(TextColor.ANSI.MAGENTA);
+        return label;
     }
 
     public static Component generateGameLogo() {

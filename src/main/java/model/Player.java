@@ -3,11 +3,13 @@ package model;
 public class Player {
 
     private int petrolLeft;
+    private int cashLeft;
     private Position position;
 
-    public Player(int petrol) {
+    public Player(int petrol, int cash) {
         this.petrolLeft = petrol;
-        this.position = new Position(0,0);
+        this.cashLeft = cash;
+        this.position = new Position(1,9);
     }
 
     public int getPetrolLeft() {
@@ -24,5 +26,13 @@ public class Player {
 
     public void setPosition(Position position) {
         this.position = position;
+    }
+
+    public int getCashLeft() {
+        return cashLeft;
+    }
+
+    public void setCashLeft(int cashLeft) {
+        this.cashLeft = cashLeft;
     }
 }

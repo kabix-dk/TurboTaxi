@@ -4,16 +4,22 @@ import view.maps.Maps;
 
 public class Game {
 
+    private final static int MAX_PETROL_LEFT = 40;
+
     private Player player;
+    private String[] mapCopy = Maps.generateSuperMap();
 
     public Game() {
     }
 
-    public boolean canMove(Player player, Position newPosition) {
+    public boolean canMove(Position newPosition, Player player) {
         if(newPosition.getX() >= Maps.sizeX || newPosition.getX() < 0 ) {
             return false;
         }
         if(newPosition.getY() >= Maps.sizeY || newPosition.getY() < 0) {
+            return false;
+        }
+        if(mapCopy[newPosition.getY()].charAt(newPosition.getX()) == Field.BUILDING){
             return false;
         }
         return true;
@@ -43,12 +49,23 @@ public class Game {
                 return false;
         }
 
-        if(!canMove(player,newPosition)){
+        if(!canMove(newPosition, player)){
             return false;
         }
 
+
+        player.setPetrolLeft(player.getPetrolLeft() - 1);
+        visitPetrolStation(player);
         player.setPosition(newPosition);
         return true;
+    }
+
+    private void visitPetrolStation(Player player) {
+        if (mapCopy[player.getPosition().getY()].charAt(player.getPosition().getX()) == Field.PETROL_STATION){
+            int dif = Math.min(player.getCashLeft(), MAX_PETROL_LEFT-player.getPetrolLeft());
+            player.setPetrolLeft(player.getPetrolLeft() + dif);
+            player.setCashLeft(player.getCashLeft() - dif);
+        }
     }
 
     public Player getPlayer() {

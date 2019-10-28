@@ -4,9 +4,14 @@ public class Field {
 
     public static final char ROAD = ' ';
     public static final char BUILDING = '*';
-    public static final char CLIENT_AGRESOR = '!';
-    public static final char CLIENT_CASUAL = '@';
-    public static final char CLIENT_ANONYMOUS = '#';
-    public static final char CLIENT_REACH = '$';
+    public static final char CLIENT_AGRESOR = '1';
+    public static final char CLIENT_CASUAL = '2';
+    public static final char CLIENT_ANONYMOUS = '3';
+    public static final char CLIENT_REACH = '4';
+    public static final char HOUSE_AGRESOR = '!';
+    public static final char HOUSE_CASUAL = '@';
+    public static final char HOUSE_ANONYMOUS = '#';
+    public static final char HOUSE_REACH = '$';
+    public static final char PETROL_STATION = '^';
 
 }
