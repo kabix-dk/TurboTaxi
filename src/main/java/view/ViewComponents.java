@@ -45,13 +45,4 @@ public class ViewComponents {
         label.setForegroundColor(TextColor.ANSI.YELLOW);
         return label.withBorder(Borders.doubleLine());
     }
-
-    public static String[] generateKlepaczeMap() {
-        String[] map = {"   **          ",
-                        "**  *          ",
-                        "** **  **  * **",
-                        "               ",
-                        "** * * ** **   "};
-        return map;
-    }
 }

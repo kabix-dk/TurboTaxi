@@ -6,6 +6,11 @@ import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.Window;
 import com.googlecode.lanterna.gui2.WindowListener;
 import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.input.KeyType;
+import model.Direction;
+import model.Game;
+import model.Player;
+import model.Position;
 import view.View;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -13,9 +18,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class MainController {
 
     private final View view;
+    private final Game game;
+    private GameWindowListener gameWindowListener;
 
-    public MainController(View view) {
+    public MainController(View view, Game game) {
         this.view = view;
+        this.game = game;
         addListeners();
     }
 
@@ -38,6 +46,7 @@ public class MainController {
                 view.getNewGameWindow().close();
                 view.showWindow(view.getMainMenuWindow());
             } else if (button == view.getNewGameWindow().getNewGameButton()) {
+                prepareNewGame(20);
                 view.getNewGameWindow().close();
                 view.showWindow(view.getGameWindow());
             }
@@ -63,12 +72,28 @@ public class MainController {
 
         @Override
         public void onUnhandledInput(Window window, KeyStroke keyStroke, AtomicBoolean atomicBoolean) {
+            Position oldPosition = game.getPlayer().getPosition();
+            boolean updateFields = false;
+            if (keyStroke.getKeyType() == KeyType.ArrowUp) {
+                updateFields = game.move(game.getPlayer(), Direction.UP);
+            } else if (keyStroke.getKeyType() == KeyType.ArrowDown) {
+                updateFields = game.move(game.getPlayer(), Direction.DOWN);
+            } else if (keyStroke.getKeyType() == KeyType.ArrowLeft) {
+                updateFields = game.move(game.getPlayer(), Direction.LEFT);
+            } else if (keyStroke.getKeyType() == KeyType.ArrowRight) {
+                updateFields = game.move(game.getPlayer(), Direction.RIGHT);
+            }
 
+            if(updateFields) {
+                view.getGameWindow().updateFields(oldPosition, game.getPlayer().getPosition());
+            }
         }
     }
 
     private void addListeners() {
+        gameWindowListener = new GameWindowListener();
         Button.Listener buttonListener = new ButtonListener();
+
 
         view.getMainMenuWindow().getOptionsButton().addListener(buttonListener);
         view.getMainMenuWindow().getExitGameButton().addListener(buttonListener);
@@ -78,5 +103,11 @@ public class MainController {
 
         view.getNewGameWindow().getReturnButton().addListener(buttonListener);
         view.getNewGameWindow().getNewGameButton().addListener(buttonListener);
+    }
+
+    private void prepareNewGame(int petrol) {
+        game.setPlayer(new Player(petrol));
+        view.createGameWindow(game);
+        view.getGameWindow().addWindowListener(gameWindowListener);
     }
 }

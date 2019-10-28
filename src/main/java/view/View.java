@@ -5,6 +5,7 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import model.Game;
 import view.windows.GameWindow;
 import view.windows.MainMenuWindow;
 import view.windows.NewGameWindow;
@@ -30,7 +31,6 @@ public class View extends BasicWindow {
             this.mainMenuWindow = new MainMenuWindow();
             this.optionsWindow = new OptionsWindow();
             this.newGameWindow = new NewGameWindow();
-            this.gameWindow = new GameWindow();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -43,6 +43,10 @@ public class View extends BasicWindow {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void createGameWindow(Game game) {
+        this.gameWindow = new GameWindow(game);
     }
 
     public void showWindow(SampleWindow window) { this.textGUI.addWindowAndWait(window.show()); }
