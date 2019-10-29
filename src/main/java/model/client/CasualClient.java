@@ -2,17 +2,21 @@ package model.client;
 
 import model.Position;
 
+import java.util.Random;
+
 public class CasualClient extends Client {
 
     private int tip;
 
     public CasualClient(Position position, int type) {
         super(position, type);
-        this.tip = 4;
+        this.tip = 3;
     }
 
     @Override
     public int getTip() {
+        Random generator = new Random();
+        tip = generator.nextInt(4) + tip;
         return tip;
     }
 

@@ -23,9 +23,9 @@ public class MainMenuWindow extends SampleWindow {
         this.newGameButton = new Button("NOWA GRA");
         newGameButton.setLayoutData(GridLayout.createLayoutData(GridLayout.Alignment.CENTER, GridLayout.Alignment.CENTER));
         panel.addComponent(newGameButton);
-        this.optionsButton = new Button("OPCJE");
-        optionsButton.setLayoutData(GridLayout.createLayoutData(GridLayout.Alignment.CENTER, GridLayout.Alignment.CENTER));
-        panel.addComponent(optionsButton);
+//        this.optionsButton = new Button("OPCJE");
+//        optionsButton.setLayoutData(GridLayout.createLayoutData(GridLayout.Alignment.CENTER, GridLayout.Alignment.CENTER));
+//        panel.addComponent(optionsButton);
         panel.addComponent(new EmptySpace(new TerminalSize(0, 1)));
         this.exitGameButton = new Button("WYJDŹ Z GRY");
         exitGameButton.setLayoutData(GridLayout.createLayoutData(GridLayout.Alignment.CENTER, GridLayout.Alignment.CENTER));

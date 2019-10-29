@@ -1,15 +1,14 @@
 package view;
 
 import com.googlecode.lanterna.gui2.*;
+import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
+import com.googlecode.lanterna.gui2.dialogs.MessageDialogButton;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import model.Game;
-import view.windows.GameWindow;
-import view.windows.MainMenuWindow;
-import view.windows.NewGameWindow;
-import view.windows.OptionsWindow;
+import view.windows.*;
 
 import java.io.IOException;
 
@@ -22,6 +21,7 @@ public class View extends BasicWindow {
     private OptionsWindow optionsWindow;
     private NewGameWindow newGameWindow;
     private GameWindow gameWindow;
+    private EscapeGame escapeGame;
 
     public View() {
         try {
@@ -31,6 +31,7 @@ public class View extends BasicWindow {
             this.mainMenuWindow = new MainMenuWindow();
             this.optionsWindow = new OptionsWindow();
             this.newGameWindow = new NewGameWindow();
+            this.escapeGame = new EscapeGame();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -49,6 +50,10 @@ public class View extends BasicWindow {
         this.gameWindow = new GameWindow(game);
     }
 
+    public MessageDialogButton showMessageDialog(String title, String text, MessageDialogButton... buttons) {
+        return MessageDialog.showMessageDialog(this.textGUI, title, text, buttons);
+    }
+
     public void showWindow(SampleWindow window) { this.textGUI.addWindowAndWait(window.show()); }
 
     public MainMenuWindow getMainMenuWindow() {
@@ -65,5 +70,9 @@ public class View extends BasicWindow {
 
     public GameWindow getGameWindow() {
         return gameWindow;
+    }
+
+    public EscapeGame getEscapeGame() {
+        return escapeGame;
     }
 }

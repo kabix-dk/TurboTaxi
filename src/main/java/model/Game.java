@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class Game {
 
-    private final static int MAX_PETROL_LEFT = 40;
+    private final static int MAX_PETROL_LEFT = 70;
 
     private Player player;
     private Client client;
@@ -69,25 +69,25 @@ public class Game {
             switch(client.getType()) {
                 case 1:
                     if(x == 1 && y == 2) {
-                        player.setCashLeft(player.getCashLeft() + client.getTip());
+                        player.setCashLeft((int) (player.getCashLeft() + client.getTip() + (client.getCost()*1.7)));
                         setClient();
                     }
                     break;
                 case 2:
                     if(x == 24 && y == 16) {
-                        player.setCashLeft(player.getCashLeft() + client.getTip());
+                        player.setCashLeft((int) (player.getCashLeft() + client.getTip() + (client.getCost()*1.7)));
                         setClient();
                     }
                     break;
                 case 3:
                     if(x == 2 && y == 18) {
-                        player.setCashLeft(player.getCashLeft() + client.getTip());
+                        player.setCashLeft((int) (player.getCashLeft() + client.getTip() + (client.getCost()*1.7)));
                         setClient();
                     }
                     break;
                 case 4:
                     if(x == 26 && y == 1) {
-                        player.setCashLeft(player.getCashLeft() + client.getTip());
+                        player.setCashLeft((int) (player.getCashLeft() + client.getTip() + (client.getCost()*1.7)));
                         setClient();
                     }
                     break;

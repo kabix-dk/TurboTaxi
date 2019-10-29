@@ -21,6 +21,7 @@ public class GameWindow extends SampleWindow {
 
     private Label petrolLeftLabel;
     private Label cashLeftLabel;
+    private Label lastClient;
 
     public GameWindow(Game game) {
         super("Gra trwa");
@@ -55,11 +56,14 @@ public class GameWindow extends SampleWindow {
         Panel statsPanel = new Panel();
         statsPanel.setLayoutManager(new GridLayout(2));
         statsPanel.addComponent(new Label("Petrol left:"));
-        petrolLeftLabel = new Label("30");
+        petrolLeftLabel = new Label("70");
         statsPanel.addComponent(petrolLeftLabel);
         statsPanel.addComponent(new Label("Cash left:"));
-        cashLeftLabel = new Label("5");
+        cashLeftLabel = new Label("50");
         statsPanel.addComponent(cashLeftLabel);
+        statsPanel.addComponent(new Label("Actual client:"));
+        lastClient = new Label("?");
+        statsPanel.addComponent(lastClient);
         mainPanel.addComponent(statsPanel.withBorder(Borders.singleLine()));
 
         super.setComponent(mainPanel);
@@ -87,5 +91,7 @@ public class GameWindow extends SampleWindow {
         Label addHere = (Label) this.mapComponents.get(client.getPosition());
         addHere.setForegroundColor(clientLabel.getForegroundColor());
         addHere.setText(clientLabel.getText());
+        lastClient.setForegroundColor(clientLabel.getForegroundColor());
+        lastClient.setText(clientLabel.getText());
     }
 }

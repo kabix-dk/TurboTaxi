@@ -2,6 +2,8 @@ package model.client;
 
 import model.Position;
 
+import java.util.Random;
+
 public class ReachClient extends Client {
 
     private int tip;
@@ -13,6 +15,8 @@ public class ReachClient extends Client {
 
     @Override
     public int getTip() {
+        Random generator = new Random();
+        tip = generator.nextInt(5) + tip;
         return tip;
     }
 

@@ -10,7 +10,6 @@ public abstract class Client {
     private int cost;
     private int tip;
 
-
     public Client(Position position, int type) {
         this.type = type;
         this.position = position;
@@ -26,16 +25,8 @@ public abstract class Client {
         return position;
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
-    }
-
     public int getType() {
         return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
     }
 
     public boolean isTaken() {
@@ -48,10 +39,6 @@ public abstract class Client {
 
     public int getCost() {
         return cost;
-    }
-
-    public void setCost(int cost) {
-        this.cost = cost;
     }
 
     public int getTip() {

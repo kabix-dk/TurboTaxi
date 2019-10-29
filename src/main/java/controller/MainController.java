@@ -5,10 +5,10 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.Window;
 import com.googlecode.lanterna.gui2.WindowListener;
+import com.googlecode.lanterna.gui2.dialogs.MessageDialogButton;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import model.*;
-import model.client.Client;
 import view.View;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -44,9 +44,15 @@ public class MainController {
                 view.getNewGameWindow().close();
                 view.showWindow(view.getMainMenuWindow());
             } else if (button == view.getNewGameWindow().getNewGameButton()) {
-                prepareNewGame(30, 25);
+                prepareNewGame(70, 50);
                 view.getNewGameWindow().close();
                 view.showWindow(view.getGameWindow());
+            } else if (button == view.getEscapeGame().getEndOfGameButton()) {
+                view.getEscapeGame().close();
+                view.getGameWindow().close();
+                view.showWindow(view.getMainMenuWindow());
+            } else if(button == view.getEscapeGame().getReturnButton()) {
+                view.getEscapeGame().close();
             }
         }
     }
@@ -80,6 +86,8 @@ public class MainController {
                 updateFields = game.move(game.getPlayer(), Direction.LEFT);
             } else if (keyStroke.getKeyType() == KeyType.ArrowRight) {
                 updateFields = game.move(game.getPlayer(), Direction.RIGHT);
+            } else if (keyStroke.getKeyType() == KeyType.Escape) {
+                view.showWindow(view.getEscapeGame());
             }
 
             if(game.updateClient()){
@@ -87,6 +95,19 @@ public class MainController {
             }
 
             if(updateFields) {
+
+                if(game.getPlayer().getPetrolLeft() == -1) {
+                    MessageDialogButton answer = view.showMessageDialog("Przegrałeś :(", "Czy chcesz powrócić do menu głównego?", MessageDialogButton.Yes, MessageDialogButton.No);
+
+                    if(answer == MessageDialogButton.Yes) {
+                        view.getGameWindow().close();
+                        view.showWindow(view.getMainMenuWindow());
+                    } else {
+                        System.exit(0);
+                    }
+
+                }
+
                 view.getGameWindow().updateFields(oldPosition, game.getPlayer().getPosition());
                 view.getGameWindow().updateStats();
             }
@@ -98,7 +119,7 @@ public class MainController {
         Button.Listener buttonListener = new ButtonListener();
 
 
-        view.getMainMenuWindow().getOptionsButton().addListener(buttonListener);
+//        view.getMainMenuWindow().getOptionsButton().addListener(buttonListener);
         view.getMainMenuWindow().getExitGameButton().addListener(buttonListener);
         view.getMainMenuWindow().getNewGameButton().addListener(buttonListener);
 
@@ -106,6 +127,9 @@ public class MainController {
 
         view.getNewGameWindow().getReturnButton().addListener(buttonListener);
         view.getNewGameWindow().getNewGameButton().addListener(buttonListener);
+
+        view.getEscapeGame().getEndOfGameButton().addListener(buttonListener);
+        view.getEscapeGame().getReturnButton().addListener(buttonListener);
     }
 
     private void prepareNewGame(int petrol, int cash) {
