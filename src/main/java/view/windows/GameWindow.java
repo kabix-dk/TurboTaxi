@@ -3,11 +3,11 @@ package view.windows;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.gui2.*;
+import model.client.Client;
 import model.Field;
 import model.Game;
 import model.Position;
 import view.SampleWindow;
-import view.View;
 import view.ViewComponents;
 import view.maps.Maps;
 
@@ -80,5 +80,12 @@ public class GameWindow extends SampleWindow {
     public void updateStats() {
         petrolLeftLabel.setText(String.valueOf(game.getPlayer().getPetrolLeft()));
         cashLeftLabel.setText(String.valueOf(game.getPlayer().getCashLeft()));
+    }
+
+    public void updateClient(Client client) {
+        Label clientLabel = (Label) ViewComponents.createField((char) (client.getType()+'0'));
+        Label addHere = (Label) this.mapComponents.get(client.getPosition());
+        addHere.setForegroundColor(clientLabel.getForegroundColor());
+        addHere.setText(clientLabel.getText());
     }
 }

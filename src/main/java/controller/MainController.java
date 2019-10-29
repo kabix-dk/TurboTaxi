@@ -7,10 +7,8 @@ import com.googlecode.lanterna.gui2.Window;
 import com.googlecode.lanterna.gui2.WindowListener;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
-import model.Direction;
-import model.Game;
-import model.Player;
-import model.Position;
+import model.*;
+import model.client.Client;
 import view.View;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -84,6 +82,10 @@ public class MainController {
                 updateFields = game.move(game.getPlayer(), Direction.RIGHT);
             }
 
+            if(game.updateClient()){
+                view.getGameWindow().updateClient(game.getClient());
+            }
+
             if(updateFields) {
                 view.getGameWindow().updateFields(oldPosition, game.getPlayer().getPosition());
                 view.getGameWindow().updateStats();
@@ -107,6 +109,7 @@ public class MainController {
     }
 
     private void prepareNewGame(int petrol, int cash) {
+        game.setClient();
         game.setPlayer(new Player(petrol, cash));
         view.createGameWindow(game);
         view.getGameWindow().addWindowListener(gameWindowListener);

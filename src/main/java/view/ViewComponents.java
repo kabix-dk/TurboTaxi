@@ -35,19 +35,23 @@ public class ViewComponents {
                 label.setBackgroundColor(TextColor.ANSI.GREEN);
                 return label;
             case Field.CLIENT_AGRESOR:
-                label = new Label("!");
+                label = new Label("! ");
+                label.addStyle(SGR.BOLD);
                 label.setForegroundColor(TextColor.ANSI.RED);
                 return label;
             case Field.CLIENT_ANONYMOUS:
-                label = new Label("#");
+                label = new Label("# ");
+                label.addStyle(SGR.BOLD);
                 label.setForegroundColor(TextColor.ANSI.CYAN);
                 return label;
             case Field.CLIENT_CASUAL:
-                label = new Label("@");
+                label = new Label("@ ");
+                label.addStyle(SGR.BOLD);
                 label.setForegroundColor(TextColor.ANSI.BLUE);
                 return label;
             case Field.CLIENT_REACH:
-                label = new Label("$");
+                label = new Label("$ ");
+                label.addStyle(SGR.BOLD);
                 label.setForegroundColor(TextColor.ANSI.GREEN);
                 return label;
             case Field.PETROL_STATION:
