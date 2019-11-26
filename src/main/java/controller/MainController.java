@@ -118,8 +118,6 @@ public class MainController {
         gameWindowListener = new GameWindowListener();
         Button.Listener buttonListener = new ButtonListener();
 
-
-//        view.getMainMenuWindow().getOptionsButton().addListener(buttonListener);
         view.getMainMenuWindow().getExitGameButton().addListener(buttonListener);
         view.getMainMenuWindow().getNewGameButton().addListener(buttonListener);
 
